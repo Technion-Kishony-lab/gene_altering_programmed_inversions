@@ -11,6 +11,7 @@ In a terminal on a Linux machine (we used Ubuntu 20.04.4):
 >>> conda install -c conda-forge jupyterlab matplotlib ipympl xlsxwriter
 >>> conda install -c bioconda ncbi-genome-download ncbi-acc-download vsearch blast=2.12 progressivemauve=snapshot_2015_02_13 sra-tools=2.10 bowtie2 samtools
 >>> python -Werror searching_for_pis/search_for_pis_unittests.py
+
 You should now see the following output (it took 67 seconds on our server):
 .......................................
 Ran 7 tests in 67s
