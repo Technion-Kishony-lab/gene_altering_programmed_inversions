@@ -2,21 +2,23 @@
 This is the code used to produce the results described in Milman et al., 2022.
 
 ## SETUP
-In a terminal on a Linux machine (we used Ubuntu 20.04.4):
->>> download search_for_gene_altering_programmed_inversions
->>> cd search_for_gene_altering_programmed_inversions
->>> conda create --name prog_inv_env
->>> conda activate prog_inv_env
->>> conda install -c anaconda python scipy pandas biopython curl statsmodels lxml
->>> conda install -c conda-forge jupyterlab matplotlib ipympl xlsxwriter
->>> conda install -c bioconda ncbi-genome-download ncbi-acc-download vsearch blast=2.12 progressivemauve=snapshot_2015_02_13 sra-tools=2.10 bowtie2 samtools
->>> python -Werror searching_for_pis/search_for_pis_unittests.py
-
+Download search_for_gene_altering_programmed_inversions to a Linux machine (we used Ubuntu 20.04.4), and execute the following commands in a terminal:
+```
+cd search_for_gene_altering_programmed_inversions
+conda create --name prog_inv_env
+conda activate prog_inv_env
+conda install -c anaconda python scipy pandas biopython curl statsmodels lxml
+conda install -c conda-forge jupyterlab matplotlib ipympl xlsxwriter
+conda install -c bioconda ncbi-genome-download ncbi-acc-download vsearch blast=2.12 progressivemauve=snapshot_2015_02_13 sra-tools=2.10 bowtie2 samtools
+python -Werror searching_for_pis/search_for_pis_unittests.py
+```
 You should now see the following output (it took 67 seconds on our server):
+```
 .......................................
 Ran 7 tests in 67s
 
 OK
+```
 
 Running the actual code would take a lot more time, and potentially require a fair amount of RAM (our server had 250GB RAM at the time).
 To run the code, you would first have to update the configuration file
@@ -26,19 +28,22 @@ thresholds in the code, and virtually all thresholds should be read from the con
 steps in the pipeline that require a local BLAST nt database, you must change 'local_blast_nt_database_path' and
 'local_blast_nt_database_update_log_file_path' (see more explanations in the configuration file near these keys), and for
 the step that uses SRA data, you have to manually download SRA files, e.g., using:
->>> curl -o SRR9952487.1 https://sra-downloadb.be-md.ncbi.nlm.nih.gov/sos3/sra-pub-run-19/SRR9952487/SRR9952487.1
+```
+curl -o SRR9952487.1 https://sra-downloadb.be-md.ncbi.nlm.nih.gov/sos3/sra-pub-run-19/SRR9952487/SRR9952487.1
+```
 and move these SRA files into the directory specified by 'output_dir_path' under 'stage6' and 'sra_entries_dir_name'
 (see more explanations in the configuration file near these keys).
 
 To run the whole pipeline:
->>> python -Werror searching_for_pis/massive_screening_stage_1.py
->>> python -Werror searching_for_pis/massive_screening_stage_2.py
->>> python -Werror searching_for_pis/massive_screening_stage_3.py
->>> python -Werror searching_for_pis/massive_screening_stage_4.py
->>> python -Werror searching_for_pis/massive_screening_stage_5.py
->>> python -Werror searching_for_pis/cds_enrichment_analysis.py
->>> python -Werror searching_for_pis/massive_screening_stage_6.py
-
+```
+python -Werror searching_for_pis/massive_screening_stage_1.py
+python -Werror searching_for_pis/massive_screening_stage_2.py
+python -Werror searching_for_pis/massive_screening_stage_3.py
+python -Werror searching_for_pis/massive_screening_stage_4.py
+python -Werror searching_for_pis/massive_screening_stage_5.py
+python -Werror searching_for_pis/cds_enrichment_analysis.py
+python -Werror searching_for_pis/massive_screening_stage_6.py
+```
 After running the pipeline, you can generate the paper figures and tables by opening
 generate_paper_figures_and_tables.ipynb in JupyterLab (which is now installed if you followed the instructions in the
 SETUP section), and replacing the os.chdir() statement at the top of generate_paper_figures_and_tables.ipynb so that
@@ -69,8 +74,9 @@ The analysis in this file is described in Figures 2 and 3:
 The analysis in this file is described in Figure 4:
 - searching_for_pis/massive_screening_stage_6.py - identification of variant coexistence in long-read sequencing data.
 
-- generate_paper_figures_and_tables.ipynb - A JupyterLab notebook to generate the paper figures and tables.
+A JupyterLab notebook to generate the paper figures and tables:
+- generate_paper_figures_and_tables.ipynb
 
-
+<br><br>
 For any question or comment, please contact orenmn@gmail.com
 
