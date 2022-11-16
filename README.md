@@ -39,13 +39,13 @@ and move these SRA files into the directory specified by 'output_dir_path' under
 
 To run the whole pipeline:
 ```
-python searching_for_pis/massive_screening_stage_1.py
-python searching_for_pis/massive_screening_stage_2.py
-python searching_for_pis/massive_screening_stage_3.py
-python searching_for_pis/massive_screening_stage_4.py
-python searching_for_pis/massive_screening_stage_5.py
-python searching_for_pis/cds_enrichment_analysis.py
-python searching_for_pis/massive_screening_stage_6.py
+python -Werror searching_for_pis/massive_screening_stage_1.py
+python -Werror searching_for_pis/massive_screening_stage_2.py
+python -Werror searching_for_pis/massive_screening_stage_3.py
+python -Werror searching_for_pis/massive_screening_stage_4.py
+python -Werror searching_for_pis/massive_screening_stage_5.py
+python -Werror searching_for_pis/cds_enrichment_analysis.py
+python -Werror searching_for_pis/massive_screening_stage_6.py
 ```
 After running the pipeline, you can generate the paper figures and tables by opening
 generate_paper_figures_and_tables.ipynb in JupyterLab (which is now installed if you followed the instructions in the
