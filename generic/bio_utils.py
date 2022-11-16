@@ -23,7 +23,7 @@ from Bio import Entrez
 
 OREN_EMAIL_ADDRESS = None # enter your email here
 
-OREN_EMAIL_ADDRESS = None # enter your ncbi api key here
+OREN_NCBI_API_KEY = None # enter your ncbi api key here
 
 Entrez.api_key = OREN_NCBI_API_KEY
 Entrez.email = OREN_EMAIL_ADDRESS
