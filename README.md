@@ -2,7 +2,7 @@
 This is the code used to produce the results described in Milman et al., 2022.
 
 ## SETUP
-Download gene_altering_programmed_inversions (this repository directory) to a Linux machine (we used Ubuntu 20.04.4), and execute the following commands in a terminal:
+Download gene_altering_programmed_inversions (this repository directory) to a Linux machine (we used Ubuntu 20.04.4), install Anaconda (https://www.anaconda.com/), and execute the following commands in a terminal:
 ```
 cd gene_altering_programmed_inversions
 conda create --name prog_inv_env
