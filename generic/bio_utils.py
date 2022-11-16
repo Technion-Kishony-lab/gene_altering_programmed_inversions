@@ -756,7 +756,7 @@ def cached_download_wgs_assembly_from_ncbi(
             '--recursive',
             # '--verbose',
             '-o', wgs_gb_file_path,
-            '--api-key', OREN_NCBI_API_KEY,
+            '--api-key', MY_NCBI_API_KEY,
             nuccore_uid,
         ]
         subproc_stdout, subproc_stderr, subproc_ret_code = generic_utils.run_cmd_and_get_stdout_and_stderr(
@@ -803,7 +803,7 @@ def cached_download_nuccore_entry_from_ncbi(
                 # '--verbose',
                 '--format', output_file_type,
                 '-o', output_file_path_nuccore_entry,
-                '--api-key', OREN_NCBI_API_KEY,
+                '--api-key', MY_NCBI_API_KEY,
                 nuccore_uid,
             ]
             subproc_stdout, subproc_stderr, subproc_ret_code = generic_utils.run_cmd_and_get_stdout_and_stderr(
