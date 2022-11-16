@@ -10,6 +10,11 @@ conda activate prog_inv_env
 export PYTHONPATH=${PYTHONPATH}:`pwd`
 python -Werror searching_for_pis/search_for_pis_unittests.py
 ```
+A RuntimeError should be raised, asking you to edit two variables in gene_altering_programmed_inversions/generic/bio_utils.py to store your email and NCBI API key (https://ncbiinsights.ncbi.nlm.nih.gov/2017/11/02/new-api-keys-for-the-e-utilities/). This is required because the pipeline queries NCBI databases.
+After filling these, try running again:
+```
+python -Werror searching_for_pis/search_for_pis_unittests.py
+```
 You should now see the following output (it took 67 seconds on our server):
 ```
 .......................................
