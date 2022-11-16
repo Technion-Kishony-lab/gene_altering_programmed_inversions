@@ -5,11 +5,8 @@ This is the code used to produce the results described in Milman et al., 2022.
 Download gene_altering_programmed_inversions (this repository directory) to a Linux machine (we used Ubuntu 20.04.4), install Anaconda (https://www.anaconda.com/), and execute the following commands in a terminal:
 ```
 cd gene_altering_programmed_inversions
-conda create --name prog_inv_env
+conda create -n prog_inv_env --file conda_env.txt -c anaconda -c conda-forge -c bioconda
 conda activate prog_inv_env
-conda install -c anaconda python=3.8 scipy pandas=1.1.3 biopython curl statsmodels lxml
-conda install -c conda-forge jupyterlab matplotlib ipympl xlsxwriter
-conda install -c bioconda ncbi-genome-download ncbi-acc-download vsearch blast=2.12 progressivemauve=snapshot_2015_02_13 sra-tools=2.10 bowtie2 samtools
 export PYTHONPATH=${PYTHONPATH}:`pwd`
 python -Werror searching_for_pis/search_for_pis_unittests.py
 ```
