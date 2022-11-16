@@ -1730,12 +1730,13 @@ class TestMassiveScreening(generic_utils.MyTestCase):
             # (8636, 8760, 14818, 14942, 8636, 10858, 11973, 15527),
             # (10376, 10407, 13225, 13256, 8636, 10858, 11973, 15527),
             self.assertEqual(cds_pairs_df['operon_asymmetry'].iloc[0], 1)
-            self.assertEqual(cds_pairs_df['operon_spacer_len'].iloc[0], 11973 - 11915 - 1)
+            operon_spacer_len = 11973 - 11915 - 1
+            self.assertEqual(cds_pairs_df['operon_spacer_len'].iloc[0], operon_spacer_len)
             self.assertEqual(cds_pairs_df['max_repeat_len'].iloc[0], 10324 - 9995 + 1)
-            alpha_sum = 15527 - 14942
-            gamma_sum = 11915 - 10407 + 13225 - 11973
+            outer_sum = 15527 - 14942
+            inner_sum = 11915 - 10407 + 13225 - 11973
             self.assertEqual(cds_pairs_df['operon_closest_repeat_position_orientation_matching'].iloc[0],
-                             alpha_sum / (gamma_sum + alpha_sum))
+                             (outer_sum + operon_spacer_len) / (inner_sum + outer_sum + 2 * operon_spacer_len))
 
             assert 'repeat_len' not in ir_pairs_df
             ir_pairs_df.loc[ir_pairs_df['left1'] == 9995, 'right2'] = 13638
@@ -1743,42 +1744,44 @@ class TestMassiveScreening(generic_utils.MyTestCase):
             cds_pairs_df = cds_enrichment_analysis.get_cds_pairs_df(ir_pairs_df)
             self.assert_df_contains_cds_pairs(cds_pairs_df, {(8636, 10858, 11973, 15527)}, allow_more_cds_pairs=False)
             self.assertEqual(cds_pairs_df['operon_asymmetry'].iloc[0], 1)
-            self.assertEqual(cds_pairs_df['operon_spacer_len'].iloc[0], 11973 - 11915 - 1)
+            operon_spacer_len = 11973 - 11915 - 1
+            self.assertEqual(cds_pairs_df['operon_spacer_len'].iloc[0], operon_spacer_len)
             self.assertEqual(cds_pairs_df['max_repeat_len'].iloc[0], 10324 - 9994 + 1)
             self.assertEqual(cds_pairs_df['operon_closest_repeat_position_orientation_matching'].iloc[0],
-                             alpha_sum / (gamma_sum + alpha_sum))
+                             (outer_sum + operon_spacer_len) / (inner_sum + outer_sum + 2 * operon_spacer_len))
 
             ir_pairs_df.loc[ir_pairs_df['left1'] == 8636, 'right2'] = 14941
             ir_pairs_df.loc[ir_pairs_df['left1'] == 8636, 'left1'] = 8637
             cds_pairs_df = cds_enrichment_analysis.get_cds_pairs_df(ir_pairs_df)
             self.assert_df_contains_cds_pairs(cds_pairs_df, {(8636, 10858, 11973, 15527)}, allow_more_cds_pairs=False)
             self.assertAlmostEqual(cds_pairs_df['operon_asymmetry'].iloc[0], 1 - 1 / (15527 - 14942), places=3)
-            alpha_sum = 15527 - 14941 + 1
-            gamma_sum = 11915 - 10407 + 13225 - 11973
+            outer_sum = 15527 - 14941 + 1
+            inner_sum = 11915 - 10407 + 13225 - 11973
             self.assertEqual(cds_pairs_df['operon_closest_repeat_position_orientation_matching'].iloc[0],
-                             alpha_sum / (gamma_sum + alpha_sum))
+                             (outer_sum + operon_spacer_len) / (inner_sum + outer_sum + 2 * operon_spacer_len))
 
             ir_pairs_df.loc[ir_pairs_df['left1'] == 8637, 'right2'] = 14943
             ir_pairs_df.loc[ir_pairs_df['left1'] == 8637, 'left1'] = 8635
             cds_pairs_df = cds_enrichment_analysis.get_cds_pairs_df(ir_pairs_df)
             self.assert_df_contains_cds_pairs(cds_pairs_df, {(8636, 10858, 11973, 15527)}, allow_more_cds_pairs=False)
             self.assertEqual(cds_pairs_df['operon_asymmetry'].iloc[0], 1)
-            alpha_sum = 15527 - 14943
-            gamma_sum = 11915 - 10407 + 13225 - 11973
+            outer_sum = 15527 - 14943
+            inner_sum = 11915 - 10407 + 13225 - 11973
             self.assertEqual(cds_pairs_df['operon_closest_repeat_position_orientation_matching'].iloc[0],
-                             alpha_sum / (gamma_sum + alpha_sum))
+                             (outer_sum + operon_spacer_len) / (inner_sum + outer_sum + 2 * operon_spacer_len))
 
             ir_pairs_df['repeat1_cds_operon_start'] = 8000
             ir_pairs_df['repeat1_cds_operon_end'] = 11000
             ir_pairs_df['repeat2_cds_operon_start'] = 11500
             ir_pairs_df['repeat2_cds_operon_end'] = 18000
+            operon_spacer_len = 11500 - 11000 - 1
             cds_pairs_df = cds_enrichment_analysis.get_cds_pairs_df(ir_pairs_df)
             self.assert_df_contains_cds_pairs(cds_pairs_df, {(8636, 10858, 11973, 15527)}, allow_more_cds_pairs=False)
             self.assertEqual(cds_pairs_df['operon_asymmetry'].iloc[0], 1 - 635 / (18000 - 14943))
-            alpha_sum = 635 + 18000 - 14943
-            gamma_sum = 11000 - 10407 + 13225 - 11500
+            outer_sum = 635 + 18000 - 14943
+            inner_sum = 11000 - 10407 + 13225 - 11500
             self.assertEqual(cds_pairs_df['operon_closest_repeat_position_orientation_matching'].iloc[0],
-                             alpha_sum / (gamma_sum + alpha_sum))
+                             (outer_sum + operon_spacer_len) / (inner_sum + outer_sum + 2 * operon_spacer_len))
 
     if TEST_STAGE6:
         def assert_raw_read_alignment_results_df_contains_evidence_reads(self, all_raw_read_alignment_results_df_csv_file_path, list_of_read_name_and_evidence_type):
@@ -1879,6 +1882,11 @@ class TestMassiveScreening(generic_utils.MyTestCase):
                     'nuccore_accession_to_assembly_accesion': {'FAKE_NC_013198.1': 'GCF_000026505.1'},
                     'nuccore_accession_to_name_in_assembly': {},
                     'sra_accession_to_type_and_sra_file_name': {'SRR9952487': ('long_reads', 'SRR9952487.1')},
+                    'sra_accession_to_bioproject_accession': {'SRR9952487': 'dummy'},
+                    'rna_seq_analysis': {
+                        'inverted_repeat_max_evalue': 1e-3,
+                        'min_abs_score_diff': 100,
+                    },
                 }
             }
 

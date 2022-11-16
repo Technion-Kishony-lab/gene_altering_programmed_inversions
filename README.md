@@ -10,7 +10,7 @@ conda activate prog_inv_env
 conda install -c anaconda python=3.8 scipy pandas biopython curl statsmodels lxml
 conda install -c conda-forge jupyterlab matplotlib ipympl xlsxwriter
 conda install -c bioconda ncbi-genome-download ncbi-acc-download vsearch blast=2.12 progressivemauve=snapshot_2015_02_13 sra-tools=2.10 bowtie2 samtools
-python -Werror searching_for_pis/search_for_pis_unittests.py
+python searching_for_pis/search_for_pis_unittests.py
 ```
 You should now see the following output (it took 67 seconds on our server):
 ```
@@ -36,13 +36,13 @@ and move these SRA files into the directory specified by 'output_dir_path' under
 
 To run the whole pipeline:
 ```
-python -Werror searching_for_pis/massive_screening_stage_1.py
-python -Werror searching_for_pis/massive_screening_stage_2.py
-python -Werror searching_for_pis/massive_screening_stage_3.py
-python -Werror searching_for_pis/massive_screening_stage_4.py
-python -Werror searching_for_pis/massive_screening_stage_5.py
-python -Werror searching_for_pis/cds_enrichment_analysis.py
-python -Werror searching_for_pis/massive_screening_stage_6.py
+python searching_for_pis/massive_screening_stage_1.py
+python searching_for_pis/massive_screening_stage_2.py
+python searching_for_pis/massive_screening_stage_3.py
+python searching_for_pis/massive_screening_stage_4.py
+python searching_for_pis/massive_screening_stage_5.py
+python searching_for_pis/cds_enrichment_analysis.py
+python searching_for_pis/massive_screening_stage_6.py
 ```
 After running the pipeline, you can generate the paper figures and tables by opening
 generate_paper_figures_and_tables.ipynb in JupyterLab (which is now installed if you followed the instructions in the

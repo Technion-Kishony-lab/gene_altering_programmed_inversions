@@ -1929,23 +1929,27 @@ def do_massive_screening_stage6(
     all_raw_read_alignment_results_df_csv_file_path = os.path.join(massive_screening_stage6_out_dir_path, 'all_raw_read_alignment_results_df.csv')
     all_raw_read_alignment_results_df.to_csv(all_raw_read_alignment_results_df_csv_file_path, sep='\t', index=False)
 
+    if all_all_diff_score_alignments_dfs:
+        all_all_diff_score_alignments_df = pd.concat(all_all_diff_score_alignments_dfs, ignore_index=True)
+        all_all_diff_score_alignments_df_csv_file_path = os.path.join(massive_screening_stage6_out_dir_path, 'all_all_diff_score_alignments_df.csv')
+        all_all_diff_score_alignments_df.to_csv(all_all_diff_score_alignments_df_csv_file_path, sep='\t', index=False)
+    else:
+        all_all_diff_score_alignments_df_csv_file_path = None
 
-    all_all_diff_score_alignments_df = pd.concat(all_all_diff_score_alignments_dfs, ignore_index=True)
-    all_all_diff_score_alignments_df_csv_file_path = os.path.join(massive_screening_stage6_out_dir_path, 'all_all_diff_score_alignments_df.csv')
-    all_all_diff_score_alignments_df.to_csv(all_all_diff_score_alignments_df_csv_file_path, sep='\t', index=False)
-
-
-    rna_seq_summary_df = pd.DataFrame(rna_seq_summary_flat_dicts)
-    rna_seq_summary_df_csv_file_path = os.path.join(massive_screening_stage6_out_dir_path, 'rna_seq_summary_df.csv')
-    print(f'rna_seq_summary_df:\n{rna_seq_summary_df}')
-    rna_seq_summary_df.to_csv(rna_seq_summary_df_csv_file_path, sep='\t', index=False)
-    print('CDS contexts with positive rna seq evidence:')
-    print(
-        rna_seq_summary_df[
-            (rna_seq_summary_df['num_of_reads_matching_ref_better'] > 0) &
-            (rna_seq_summary_df['num_of_reads_matching_non_ref_better'] > 0)
-        ]['cds_context_name'].drop_duplicates()
-    )
+    if rna_seq_summary_flat_dicts:
+        rna_seq_summary_df = pd.DataFrame(rna_seq_summary_flat_dicts)
+        rna_seq_summary_df_csv_file_path = os.path.join(massive_screening_stage6_out_dir_path, 'rna_seq_summary_df.csv')
+        print(f'rna_seq_summary_df:\n{rna_seq_summary_df}')
+        rna_seq_summary_df.to_csv(rna_seq_summary_df_csv_file_path, sep='\t', index=False)
+        print('CDS contexts with positive rna seq evidence:')
+        print(
+            rna_seq_summary_df[
+                (rna_seq_summary_df['num_of_reads_matching_ref_better'] > 0) &
+                (rna_seq_summary_df['num_of_reads_matching_non_ref_better'] > 0)
+            ]['cds_context_name'].drop_duplicates()
+        )
+    else:
+        rna_seq_summary_df_csv_file_path = None
 
     stage6_results_info = {
         'all_raw_read_alignment_results_df_csv_file_path': all_raw_read_alignment_results_df_csv_file_path,
