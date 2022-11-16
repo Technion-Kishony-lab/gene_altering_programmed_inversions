@@ -20,13 +20,12 @@ with warnings.catch_warnings():
 from Bio import SeqIO
 from Bio import Entrez
 
+raise RuntimeError('remove this raise statement and add your email and NCBI API key below')
+MY_EMAIL_ADDRESS = None # enter your email here
+MY_NCBI_API_KEY = None # enter your ncbi api key here
 
-OREN_EMAIL_ADDRESS = None # enter your email here
-
-OREN_NCBI_API_KEY = None # enter your ncbi api key here
-
-Entrez.api_key = OREN_NCBI_API_KEY
-Entrez.email = OREN_EMAIL_ADDRESS
+Entrez.api_key = MY_NCBI_API_KEY
+Entrez.email = MY_EMAIL_ADDRESS
 
 class EntrezEsearchPhraseNotFound(Exception):
     pass
