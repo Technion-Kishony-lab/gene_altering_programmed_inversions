@@ -11,7 +11,7 @@ conda install -c anaconda python=3.8 scipy pandas=1.1.3 biopython curl statsmode
 conda install -c conda-forge jupyterlab matplotlib ipympl xlsxwriter
 conda install -c bioconda ncbi-genome-download ncbi-acc-download vsearch blast=2.12 progressivemauve=snapshot_2015_02_13 sra-tools=2.10 bowtie2 samtools
 export PYTHONPATH=${PYTHONPATH}:`pwd`
-python searching_for_pis/search_for_pis_unittests.py
+python -Werror searching_for_pis/search_for_pis_unittests.py
 ```
 You should now see the following output (it took 67 seconds on our server):
 ```
