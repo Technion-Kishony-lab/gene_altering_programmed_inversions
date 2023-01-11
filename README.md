@@ -1,5 +1,5 @@
 # Systematic identification of gene-altering programmed inversions across the bacterial domain
-This is the code used to produce the results described in Milman et al., 2022.
+This is the code used to produce the results described in https://doi.org/10.1093/nar/gkac1166 (Milman, Oren, Idan Yelin, and Roy Kishony. "Systematic identification of gene-altering programmed inversions across the bacterial domain." Nucleic Acids Research (2023)).
 
 ## SETUP
 Download gene_altering_programmed_inversions (this repository directory) to a Linux machine (we used Ubuntu 20.04.4), install Anaconda (https://www.anaconda.com/), and execute the following commands in a terminal:
